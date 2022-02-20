@@ -1,0 +1,22 @@
+{
+  "name": "carpark-where",
+  "version": "1.0.0",
+  "description": "car park checker system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelseyo/carpark-where.git"
+  },
+  "author": "Michael Low",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelseyo/carpark-where/issues"
+  },
+  "homepage": "https://github.com/michaelseyo/carpark-where#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
