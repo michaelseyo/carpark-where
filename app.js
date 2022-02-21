@@ -2,12 +2,18 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 
 const detailRoutes = require('./api/routes/details');
 const registerRoutes = require('./api/routes/register');
 const loginRoutes = require('./api/routes/login');
 const availabilityRoutes = require('./api/routes/availability');
+
+mongoose.connect(
+    'mongodb+srv://michaelseyo:' + 
+    process.env.MONGO_ATLAS_PW + 
+    '@carpark-where.iwmau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
