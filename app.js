@@ -12,7 +12,9 @@ const availabilityRoutes = require('./api/routes/availability');
 mongoose.connect(
     'mongodb+srv://michaelseyo:' + 
     process.env.MONGO_ATLAS_PW + 
-    '@carpark-where.iwmau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+    '@carpark-where.iwmau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+        useNewUrlParser: true
+    }
 );
 
 app.use(morgan('dev'));
