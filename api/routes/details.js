@@ -12,7 +12,9 @@ router.get('/', (req, res, next) => {
 router.get('/:memberId', async (req, res, next) => {
     const id = req.params.memberId;
     try {
-        const doc = await Member.findById(id).exec();
+        const doc = await Member.findById(id)
+                                .select('firstName lastName email password contactNumber')
+                                .exec();
         console.log('From db', doc);
         if (doc) {
             res.status(200).json(doc);
@@ -31,7 +33,20 @@ router.delete('/:memberId', async (req, res, next) => {
     const id = req.params.memberId;
     try {
         result = await Member.remove({_id: id}).exec();
-        res.status(200).json(result);
+        res.status(200).json({
+            message: 'Account deleted',
+            request: {
+                type: 'POST',
+                description: 'Create an account',
+                url: 'http://localhost:3000/register',
+                body: {
+                    firstName: 'String',
+                    lastName: 'String',
+                    email: 'String',
+                    password: 'String'
+                }
+            }
+        });
     } catch (err) {
         console.log(err)
         res.status(500).json({
@@ -51,7 +66,14 @@ router.patch('/:memberId', async (req, res, next) => {
     try {
         result = await Member.updateOne({_id: id}, { $set: updateOps }).exec();
         console.log(result);
-        res.status(200).json(result);
+        res.status(200).json({
+            message: 'Member updated',
+            request: {
+                type: 'GET',
+                description: 'Get updated details here',
+                url: 'http://localhost:3000/details/' + id
+            }
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({error: err})

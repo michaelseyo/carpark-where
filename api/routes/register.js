@@ -10,14 +10,25 @@ router.post('/', async (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        contactNumber: req.body.contactNumber
     });
     try {
         result = await member.save();
         console.log(result);
         res.status(201).json({
             message: 'POST request: Account created',
-            createdMember: result
+            createdMember: {
+                _id: result._id,
+                firstName: result.firstName,
+                lastName: result.lastName,
+                email: result.email,
+                request: {
+                    type: 'GET',
+                    description: 'Get details of member',
+                    url: 'http://localhost:3000/details/' + result._id
+                }
+            }
         });
     } catch (err) {
         console.log(err);
