@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middleware/checkAuth');
 
 const Member = require('../models/member');
 
@@ -9,7 +10,7 @@ router.get('/', (req, res, next) => {
     });
 })
 
-router.get('/:memberId', async (req, res, next) => {
+router.get('/:memberId', checkAuth, async (req, res, next) => {
     const id = req.params.memberId;
     try {
         const doc = await Member.findById(id)
@@ -29,7 +30,7 @@ router.get('/:memberId', async (req, res, next) => {
     }
 });
 
-router.delete('/:memberId', async (req, res, next) => {
+router.delete('/:memberId', checkAuth, async (req, res, next) => {
     const id = req.params.memberId;
     try {
         result = await Member.remove({_id: id}).exec();
@@ -55,7 +56,7 @@ router.delete('/:memberId', async (req, res, next) => {
     }
 });
 
-router.patch('/:memberId', async (req, res, next) => {
+router.patch('/:memberId', checkAuth, async (req, res, next) => {
     const id = req.params.memberId;
     const updateOps = {};
     // get params to update
