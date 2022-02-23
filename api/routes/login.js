@@ -1,10 +1,47 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-router.post('/', (req, res, next) => {
-    res.status(200).json({
-        message: "Logged in"
-    })
+const Member = require('../models/member');
+
+router.post('/', async (req, res, next) => {
+    const member = await Member.find({ email: req.body.email }).exec();
+    try {
+        const notExist = member.length < 1;
+        if (notExist) {
+            return res.status(401).json({
+                message: 'Auth failed'
+            });
+        } else {
+            const match = await bcrypt.compare(req.body.password, member[0].password);
+            if (match) {
+                const token = jwt.sign(
+                    {
+                        memberId: member[0]._id,
+                        email: member[0].email
+                    }, 
+                    process.env.JWT_KEY,
+                    {
+                        expiresIn: "1h"
+                    }
+                );
+                return res.status(200).json({
+                    message: 'Auth successful',
+                    token: token
+                });
+            } else {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            }
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
 });
 
 module.exports = router;
