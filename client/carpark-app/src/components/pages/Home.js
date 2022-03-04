@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
@@ -10,14 +10,14 @@ const getAvailability = async () => {
   }
 export default function Home() {
     return (
-        <Container
+        <Grid
+            align='center'
             sx={{
                 marginTop: 5
             }}
         >
             <Typography 
                 variant="h4" 
-                align="center"
             >
                 Welcome!
             </Typography>
@@ -26,6 +26,6 @@ export default function Home() {
             >
                 Test
             </Button>
-        </Container>
+        </Grid>
     );
 }

@@ -21,10 +21,6 @@ export default function NavBar() {
         navigate("/");
     }
 
-    const handleRegister = () => {
-        navigate("/register");
-    }
-
     const handleLogin = () => {
         navigate("/login");
         //setAuth(true);
@@ -68,13 +64,6 @@ export default function NavBar() {
                                 onClick={handleLogin}
                             >
                                 Login
-                            </IconButton>
-                            <IconButton
-                                size="small"
-                                color="inherit"
-                                onClick={handleRegister}
-                            >
-                                Register
                             </IconButton>
                         </div>
                     )}
