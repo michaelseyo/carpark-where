@@ -36,10 +36,10 @@ app.use((req, res, next) => {
 });
 
 // Routes to handle requests
-app.use('/details', detailRoutes);
-app.use('/register', registerRoutes);
-app.use('/login', loginRoutes);
-app.use('/availability', availabilityRoutes);
+app.use('/api/details', detailRoutes);
+app.use('/api/register', registerRoutes);
+app.use('/api/login', loginRoutes);
+app.use('/api/availability', availabilityRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
