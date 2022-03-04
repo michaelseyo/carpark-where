@@ -15,7 +15,10 @@ export default function Home() {
                 marginTop: 5
             }}
         >
-            <Typography variant="h4" align="center">
+            <Typography 
+                variant="h4" 
+                align="center"
+            >
                 Welcome!
             </Typography>
             <Button
