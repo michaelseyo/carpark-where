@@ -28,17 +28,11 @@ exports.register = async (req, res, next) => {
           result = await createdMember.save();
           console.log(result);
           res.status(201).json({
-            message: "POST request: Account created",
-            createdMember: {
-              _id: result._id,
-              firstName: result.firstName,
-              lastName: result.lastName,
-              email: result.email,
-              request: {
-                type: "GET",
-                description: "Get details of member",
-                url: "http://localhost:3001/details/" + result._id,
-              },
+            message: "Account created",
+            request: {
+              type: "GET",
+              description: "Get details of member",
+              url: "http://localhost:3001/details/" + result._id,
             },
           });
         } catch (err) {
