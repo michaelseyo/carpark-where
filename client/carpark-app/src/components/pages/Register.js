@@ -6,28 +6,31 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import { useNavigate } from "react-router-dom";
+
+const gridStyle = {
+  margin: "60px 0",
+};
+const paperStyle = {
+  padding: "40px",
+  height: "40vh",
+  minHeight: "480px",
+  width: 260,
+  margin: "20px auto",
+};
+const avatarStyle = {
+  backgroundColor: "#1976d2",
+  mb: 1,
+};
+const btnStyle = {
+  margin: "25px 0",
+};
+const inputStyle = {
+  margin: "2px 0",
+};
 
 export default function Register() {
-  const gridStyle = {
-    margin: "60px 0",
-  };
-  const paperStyle = {
-    padding: "40px",
-    height: "40vh",
-    minHeight: "480px",
-    width: 260,
-    margin: "20px auto",
-  };
-  const avatarStyle = {
-    backgroundColor: "#1976d2",
-    mb: 1,
-  };
-  const btnStyle = {
-    margin: "25px 0",
-  };
-  const inputStyle = {
-    margin: "2px 0",
-  };
+  let navigate = useNavigate();
 
   const [response, setResponse] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -83,13 +86,19 @@ export default function Register() {
   const register = () => {
     resetErrorStatus();
     if (firstName && lastName && email && password) {
-      postMember({
+      const member = {
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
-        contactNumber: contactNumber,
-      });
+      };
+      if (!contactNumber) {
+        member["contactNumber"] = contactNumber;
+      }
+      postMember(member);
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } else {
       setErrors();
     }
