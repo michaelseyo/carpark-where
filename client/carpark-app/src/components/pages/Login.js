@@ -16,7 +16,7 @@ export default function Login() {
   };
 
   const gridStyle = {
-    margin: "60px",
+    margin: "60px 0",
   };
   const paperStyle = {
     padding: "40px",
@@ -27,6 +27,7 @@ export default function Login() {
   };
   const avatarStyle = {
     backgroundColor: "#1976d2",
+    mb: 1,
   };
   const btnStyle = {
     margin: "16px 0",
@@ -61,8 +62,11 @@ export default function Login() {
           <Typography>
             Don't have an account?
             <Link
-              sx={{ margin: "5px" }}
-              underline="none"
+              sx={{
+                margin: "5px",
+                cursor: "pointer",
+              }}
+              underline="hover"
               onClick={handleSignUp}
             >
               Sign Up
