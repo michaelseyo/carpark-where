@@ -35,10 +35,19 @@ export default function Login() {
     navigate("/register");
   };
 
-  const [authState, setAuthState] = useAuthProvider();
+  const [member, setMember] = useAuthProvider();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState("");
+
+  const createSessionMember = (resJson) => {
+    const sessionMember = {
+      isAuth: true,
+      id: resJson.id,
+      token: resJson.token,
+    };
+    setMember(sessionMember);
+  };
 
   const handleLogin = async () => {
     try {
@@ -55,11 +64,8 @@ export default function Login() {
 
       if (res.status === 200) {
         const resJson = await res.json();
-        localStorage.setItem("token", resJson.token);
-        setTimeout(() => {
-          navigate("/");
-          setAuthState(true);
-        }, 2000);
+        createSessionMember(resJson);
+        navigate("/");
       } else if (res.status === 401) {
         const resJson = await res.json();
         setResponse(resJson.message);

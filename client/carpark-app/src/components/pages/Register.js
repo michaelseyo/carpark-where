@@ -92,7 +92,7 @@ export default function Register() {
         email: email,
         password: password,
       };
-      if (!contactNumber) {
+      if (contactNumber) {
         member["contactNumber"] = contactNumber;
       }
       postMember(member);

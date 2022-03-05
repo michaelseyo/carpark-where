@@ -4,8 +4,14 @@ export const AuthContext = createContext();
 
 export const useAuthProvider = () => useContext(AuthContext);
 
+export const unknownMember = {
+  isAuth: false,
+  id: "",
+  token: "",
+};
+
 export const AuthProvider = ({ children }) => {
-  const [authState, setAuthState] = useState(false); // set token together with the auth state?
+  const [member, setMember] = useState(unknownMember);
 
   const checkToken = async () => {
     try {
@@ -15,9 +21,12 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
+      setTimeout(() => {
+        checkToken();
+      }, 900 * 1000 - 500);
     } catch (err) {
       // Auth failed
-      setAuthState(false);
+      setMember(unknownMember);
     }
   };
 
@@ -26,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={[authState, setAuthState]}>
+    <AuthContext.Provider value={[member, setMember]}>
       {children}
     </AuthContext.Provider>
   );

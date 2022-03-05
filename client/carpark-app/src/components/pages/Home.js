@@ -1,16 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthProvider } from "../../store/State";
+
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export default function Home() {
   let navigate = useNavigate();
+  const [member, setMember] = useAuthProvider();
 
   const getAvailability = async () => {
     const res = await fetch("/api/availability", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${member.token}`,
         "Content-Type": "application/json",
       },
     });

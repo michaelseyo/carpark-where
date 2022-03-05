@@ -4,7 +4,7 @@ exports.getMemberDetails = async (req, res, next) => {
   const id = req.params.memberId;
   try {
     const doc = await Member.findById(id)
-      .select("firstName lastName email password contactNumber")
+      .select("firstName lastName email contactNumber")
       .exec();
     if (doc) {
       console.log("From db", doc);

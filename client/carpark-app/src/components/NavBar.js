@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthProvider } from "../store/State";
+import { useAuthProvider, unknownMember } from "../store/State";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,7 +15,7 @@ import Menu from "@mui/material/Menu";
 export default function NavBar() {
   let navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [authState, setAuthState] = useAuthProvider();
+  const [member, setMember] = useAuthProvider();
 
   const handleHome = () => {
     navigate("/");
@@ -33,10 +33,15 @@ export default function NavBar() {
     setAnchorEl(null);
   };
 
+  const handleProfile = () => {
+    handleClose();
+    navigate("/profile");
+  };
+
   const handleLogout = () => {
     handleClose();
-    setAuthState(false);
-    localStorage.setItem("token", null);
+    setMember(unknownMember);
+    navigate("/login");
   };
 
   return (
@@ -56,14 +61,14 @@ export default function NavBar() {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Carpark-Where
           </Typography>
-          {!authState && (
+          {!member.isAuth && (
             <div>
               <IconButton size="small" color="inherit" onClick={handleLogin}>
                 Login
               </IconButton>
             </div>
           )}
-          {authState && (
+          {member.isAuth && (
             <div>
               <IconButton
                 size="large"
@@ -90,7 +95,7 @@ export default function NavBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
