@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       }
       setTimeout(() => {
         checkToken();
-      }, 90 * 1000 - 500);
+      }, 900 * 1000 - 500);
     } catch (err) {
       console.log(err);
     }

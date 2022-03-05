@@ -21,7 +21,7 @@ exports.login = async (req, res, next) => {
           },
           process.env.JWT_KEY,
           {
-            expiresIn: 90,
+            expiresIn: 900,
           }
         );
         return res.status(200).json({

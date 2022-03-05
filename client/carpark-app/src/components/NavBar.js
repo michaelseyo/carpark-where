@@ -7,10 +7,11 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import HomeIcon from "@mui/icons-material/Home";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function NavBar() {
   let navigate = useNavigate();
@@ -36,6 +37,10 @@ export default function NavBar() {
   const handleProfile = () => {
     handleClose();
     navigate("/profile");
+  };
+
+  const handleSearch = () => {
+    navigate("/search");
   };
 
   const handleLogout = () => {
@@ -65,6 +70,20 @@ export default function NavBar() {
             <div>
               <IconButton size="small" color="inherit" onClick={handleLogin}>
                 Login
+              </IconButton>
+            </div>
+          )}
+          {member.isAuth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="search icon"
+                aria-controls="search-appbar"
+                aria-haspopup="true"
+                onClick={handleSearch}
+                color="inherit"
+              >
+                <SearchIcon />
               </IconButton>
             </div>
           )}
