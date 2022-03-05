@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthProvider } from "../store/State";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,8 +14,8 @@ import Menu from "@mui/material/Menu";
 
 export default function NavBar() {
   let navigate = useNavigate();
-  const [auth, setAuth] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [authState, setAuthState] = useAuthProvider();
 
   const handleHome = () => {
     navigate("/");
@@ -22,7 +23,6 @@ export default function NavBar() {
 
   const handleLogin = () => {
     navigate("/login");
-    //setAuth(true);
   };
 
   const handleMenu = (event) => {
@@ -35,7 +35,7 @@ export default function NavBar() {
 
   const handleLogout = () => {
     handleClose();
-    setAuth(false);
+    setAuthState(false);
   };
 
   return (
@@ -55,14 +55,14 @@ export default function NavBar() {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Carpark-Where
           </Typography>
-          {!auth && (
+          {!authState && (
             <div>
               <IconButton size="small" color="inherit" onClick={handleLogin}>
                 Login
               </IconButton>
             </div>
           )}
-          {auth && (
+          {authState && (
             <div>
               <IconButton
                 size="large"

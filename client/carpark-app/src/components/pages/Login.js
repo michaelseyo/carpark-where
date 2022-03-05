@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthProvider } from "../../store/State";
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -34,6 +35,7 @@ export default function Login() {
     navigate("/register");
   };
 
+  const [authState, setAuthState] = useAuthProvider();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState("");
@@ -56,6 +58,7 @@ export default function Login() {
         localStorage.setItem("token", resJson.token);
         setTimeout(() => {
           navigate("/");
+          setAuthState(true);
         }, 2000);
       } else if (res.status === 401) {
         const resJson = await res.json();
