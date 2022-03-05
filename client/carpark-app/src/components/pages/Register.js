@@ -83,7 +83,7 @@ export default function Register() {
     }
   };
 
-  const register = () => {
+  const handleRegister = () => {
     resetErrorStatus();
     if (firstName && lastName && email && password) {
       const member = {
@@ -179,7 +179,7 @@ export default function Register() {
             fullWidth
             variant="contained"
             sx={btnStyle}
-            onClick={register}
+            onClick={handleRegister}
           >
             Confirm
           </Button>

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
@@ -9,28 +10,60 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
+const gridStyle = {
+  margin: "60px 0",
+};
+const paperStyle = {
+  padding: "40px",
+  height: "30vh",
+  minHeight: "320px",
+  width: 260,
+  margin: "20px auto",
+};
+const avatarStyle = {
+  backgroundColor: "#1976d2",
+  mb: 1,
+};
+const btnStyle = {
+  margin: "16px 0",
+};
+
 export default function Login() {
   let navigate = useNavigate();
-  const handleSignUp = () => {
+  const handleRegister = () => {
     navigate("/register");
   };
 
-  const gridStyle = {
-    margin: "60px 0",
-  };
-  const paperStyle = {
-    padding: "40px",
-    height: "30vh",
-    minHeight: "320px",
-    width: 260,
-    margin: "20px auto",
-  };
-  const avatarStyle = {
-    backgroundColor: "#1976d2",
-    mb: 1,
-  };
-  const btnStyle = {
-    margin: "16px 0",
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [response, setResponse] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (res.status === 200) {
+        const resJson = await res.json();
+        localStorage.setItem("token", resJson.token);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      } else if (res.status === 401) {
+        const resJson = await res.json();
+        setResponse(resJson.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -47,6 +80,7 @@ export default function Login() {
             placeholder="Enter email"
             fullWidth
             required
+            onChange={(e) => setEmail(e.currentTarget.value)}
           />
           <TextField
             label="Password"
@@ -55,8 +89,14 @@ export default function Login() {
             fullWidth
             type="password"
             required
+            onChange={(e) => setPassword(e.currentTarget.value)}
           />
-          <Button type="submit" fullWidth variant="contained" sx={btnStyle}>
+          <Button
+            sx={btnStyle}
+            variant="contained"
+            fullWidth
+            onClick={handleLogin}
+          >
             Log In
           </Button>
           <Typography>
@@ -67,11 +107,12 @@ export default function Login() {
                 cursor: "pointer",
               }}
               underline="hover"
-              onClick={handleSignUp}
+              onClick={handleRegister}
             >
               Sign Up
             </Link>
           </Typography>
+          <Typography>{response}</Typography>
         </Grid>
       </Paper>
     </Grid>
