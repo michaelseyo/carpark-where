@@ -7,7 +7,8 @@ import Home from "./components/pages/Home";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import Profile from "./components/pages/Profile";
-import Error from "./components/pages/Error.js";
+import Error from "./components/pages/Error";
+import Search from "./components/pages/Search";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/search" element={<Search />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>

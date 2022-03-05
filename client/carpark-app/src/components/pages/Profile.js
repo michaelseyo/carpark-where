@@ -61,7 +61,7 @@ export default function Profile() {
       return;
     }
     displayMemberDetails();
-  }, []);
+  }, [member]);
 
   return (
     <Grid sx={gridStyle}>

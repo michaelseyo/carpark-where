@@ -65,7 +65,7 @@ export default function Login() {
       if (res.status === 200) {
         const resJson = await res.json();
         createSessionMember(resJson);
-        navigate("/");
+        navigate("/search");
       } else if (res.status === 401) {
         const resJson = await res.json();
         setResponse(resJson.message);

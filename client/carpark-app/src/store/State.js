@@ -21,12 +21,15 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
+      console.log(res);
+      if (res.statusText === "Unauthorized") {
+        setMember(unknownMember);
+      }
       setTimeout(() => {
         checkToken();
-      }, 900 * 1000 - 500);
+      }, 90 * 1000 - 500);
     } catch (err) {
-      // Auth failed
-      setMember(unknownMember);
+      console.log(err);
     }
   };
 
