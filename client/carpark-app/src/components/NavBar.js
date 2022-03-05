@@ -36,6 +36,7 @@ export default function NavBar() {
   const handleLogout = () => {
     handleClose();
     setAuthState(false);
+    localStorage.setItem("token", null);
   };
 
   return (

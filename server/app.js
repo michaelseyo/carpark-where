@@ -9,6 +9,7 @@ const detailRoutes = require("./routes/details");
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const availabilityRoutes = require("./routes/availability");
+const checkAuthRoutes = require("./routes/checkAuth");
 
 mongoose.connect(
   "mongodb+srv://michaelseyo:" +
@@ -43,6 +44,7 @@ app.use("/api/details", detailRoutes);
 app.use("/api/register", registerRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/availability", availabilityRoutes);
+app.use("/api/check-auth", checkAuthRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
