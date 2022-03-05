@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkToken = async () => {
     try {
-      const res = await fetch("/api/check-auth", {
+      const res = await fetch("/api/auth", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
