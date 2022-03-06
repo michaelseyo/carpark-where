@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import CardMedia from "@mui/material/CardMedia";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
+import Collapse from "@mui/material/Collapse";
 
 import CarparkList from "../CarparkList";
 import "../../loader.css";
@@ -31,6 +32,7 @@ export default function Search() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const filterData = (input) => {
     setFilteredData(
@@ -73,6 +75,10 @@ export default function Search() {
     getAvailabilityData();
   }, [member]);
 
+  useEffect(() => {
+    setChecked(true);
+  }, []);
+
   return (
     <Grid
       align="center"
@@ -80,41 +86,47 @@ export default function Search() {
         margin: 5,
       }}
     >
-      <Typography variant="h3" color="primary" sx={{ fontWeight: "bolder" }}>
-        Retrieve information
-      </Typography>
-
-      <CardMedia
-        sx={cardMediaStyle}
-        component="img"
-        height="500"
-        image={searchImg}
-        alt="people-searching"
-      />
-
-      <TextField
-        label="By carpark number"
-        variant="outlined"
-        placeholder="Search..."
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        onChange={(e) => filterData(e.currentTarget.value)}
-        sx={searchStyle}
-      />
-      <Divider />
-      {!loading && (
-        <Typography sx={{ margin: "20px 0" }} variant="h5" className="loader">
-          ...
+      <Collapse
+        in={checked}
+        {...(checked ? { timeout: 1000 } : {})}
+        collapsedHeight={50}
+      >
+        <Typography variant="h3" color="primary" sx={{ fontWeight: "bolder" }}>
+          Retrieve information
         </Typography>
-      )}
-      <CarparkList
-        filteredData={filteredData.length === 0 ? data : filteredData}
-      />
+
+        <CardMedia
+          sx={cardMediaStyle}
+          component="img"
+          height="500"
+          image={searchImg}
+          alt="people-searching"
+        />
+
+        <TextField
+          label="By carpark number"
+          variant="outlined"
+          placeholder="Search..."
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          onChange={(e) => filterData(e.currentTarget.value)}
+          sx={searchStyle}
+        />
+        <Divider />
+        {!loading && (
+          <Typography sx={{ margin: "20px 0" }} variant="h5" className="loader">
+            ...
+          </Typography>
+        )}
+        <CarparkList
+          filteredData={filteredData.length === 0 ? data : filteredData}
+        />
+      </Collapse>
     </Grid>
   );
 }

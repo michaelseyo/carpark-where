@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import Collapse from "@mui/material/Collapse";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 
 import profileImg from "../../images/profile-image.jpg";
@@ -40,6 +41,7 @@ export default function Profile() {
   let navigate = useNavigate();
   const [member, setMember] = useAuthProvider();
   const [profile, setProfile] = useState({});
+  const [checked, setChecked] = useState(false);
 
   const displayMemberDetails = async () => {
     try {
@@ -69,53 +71,63 @@ export default function Profile() {
     displayMemberDetails();
   }, [member]);
 
+  useEffect(() => {
+    setChecked(true);
+  }, []);
+
   return (
-    <Grid sx={gridStyle}>
-      <Paper elevation={10} sx={paperStyle}>
-        <Grid align="center">
-          <Avatar sx={avatarStyle}>
-            <AccessibilityNewIcon />
-          </Avatar>
-          <Typography
-            variant="h5"
-            color="primary"
-            sx={{ fontWeight: "bolder" }}
-          >
-            My Profile
-          </Typography>
+    <Collapse
+      in={checked}
+      {...(checked ? { timeout: 1000 } : {})}
+      collapsedHeight={50}
+    >
+      <Grid sx={gridStyle}>
+        <Paper elevation={10} sx={paperStyle}>
+          <Grid align="center">
+            <Avatar sx={avatarStyle}>
+              <AccessibilityNewIcon />
+            </Avatar>
+            <Typography
+              variant="h5"
+              color="primary"
+              sx={{ fontWeight: "bolder" }}
+            >
+              My Profile
+            </Typography>
 
-          <Grid sx={detailsGridStyle}>
-            <Divider sx={dividerStyle} textAlign="left">
-              First Name
-            </Divider>
-            <Typography align="right">{profile.firstName}</Typography>
-            <Divider sx={dividerStyle} textAlign="left">
-              Last Name
-            </Divider>
-            <Typography align="right">{profile.lastName}</Typography>
-            <Divider sx={dividerStyle} textAlign="left">
-              Email
-            </Divider>
-            <Typography align="right">{profile.email}</Typography>
-            {profile.contactNumber && (
-              <>
-                <Divider sx={dividerStyle} textAlign="left">
-                  Contact Number
-                </Divider>
-                <Typography align="right">{profile.contactNumber}</Typography>
-              </>
-            )}
+            <Grid sx={detailsGridStyle}>
+              <Divider sx={dividerStyle} textAlign="left">
+                First Name
+              </Divider>
+              <Typography align="right">{profile.firstName}</Typography>
+              <Divider sx={dividerStyle} textAlign="left">
+                Last Name
+              </Divider>
+              <Typography align="right">{profile.lastName}</Typography>
+              <Divider sx={dividerStyle} textAlign="left">
+                Email
+              </Divider>
+              <Typography align="right">{profile.email}</Typography>
+              {profile.contactNumber && (
+                <>
+                  <Divider sx={dividerStyle} textAlign="left">
+                    Contact Number
+                  </Divider>
+                  <Typography align="right">{profile.contactNumber}</Typography>
+                </>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
 
-      <CardMedia
-        sx={cardMediaStyle}
-        component="img"
-        height="500"
-        image={profileImg}
-        alt="profile-pics"
-      />
-    </Grid>
+        <CardMedia
+          sx={cardMediaStyle}
+          component="img"
+          height="500"
+          image={profileImg}
+          alt="profile-pics"
+        />
+      </Grid>
+    </Collapse>
   );
 }
