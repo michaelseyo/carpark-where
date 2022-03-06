@@ -18,46 +18,112 @@ Token is obtained on making a POST request containing the email and password of 
 
 ### api/register:
 
-```
 - Creates an account
-- Account details are returned as a response (excluding password)
 - POST request
 
 In the request JSON body:
-- required fields: firstName, lastName, email, password
+
+- Required fields: firstName, lastName, email, password
+
+```
+{
+    "firstName": "test",
+    "lastName": "me",
+    "email": "test3@test.com",
+    "password": "test"
+}
+```
+
 - Optional field: contactNumber
+
+```
+{
+    "firstName": "test",
+    "lastName": "me",
+    "email": "test4@test.com",
+    "password": "test"
+    "contactNumber": "12345678"
+}
+```
+
+Response:
+
+```
+{
+    "message": "Account created",
+    "request": {
+        "type": "GET",
+        "description": "Get details of member",
+        "url": "https://my-carpark-api.herokuapp.com/api/details/6224aa01309d2d07a3975c61"
+    }
+}
 ```
 
 ### api/login:
 
-```
 - Login
 - A token and memberId is sent to the client as response
 - POST request
 
 In the request JSON body:
-- email
-- password
+
+```
+{
+    "email": "test2@test.com",
+    "password": "test"
+}
+```
+
+Response:
+
+```
+{
+    "message": "Auth successful",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW1iZXJJZCI6IjYyMjRhODM4ZDEwOWYzMzZjYzU2OGUwNyIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE2NDY1Njk2NjEsImV4cCI6MTY0NjU3MDU2MX0.Jeb4y18m3BX3KeIyRNOTGZAJSZ6KIdoQYg-e0Uy_lKk",
+    "id": "6224a838d109f336cc568e07"
+}
 ```
 
 ### api/details/memberId:
 
-```
 - (Protected Route) Retrieves member details
 - GET request
 
 Request Headers:
-- Authorization: Bearer <token>
+
+```
+Authorization: Bearer <token>
+```
+
+Response:
+
+```
+{
+    "_id": "6224a838d109f336cc568e07",
+    "firstName": "test",
+    "lastName": "me",
+    "email": "test2@test.com"
+}
 ```
 
 ### api/availability:
 
-```
 - (Protected Route) Retrieve carpark data
 - GET request
 
 Request Headers:
-- Authorization: Bearer <token>
+
+```
+Authorization: Bearer <token>
+```
+
+Response:
+
+```
+{
+    "message": "Current carpark availabilites were fetched",
+    "data": ...
+}
 ```
 
 ## Tech used:
