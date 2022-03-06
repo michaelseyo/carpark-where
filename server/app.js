@@ -11,14 +11,20 @@ const loginRoutes = require("./routes/login");
 const availabilityRoutes = require("./routes/availability");
 const authRoutes = require("./routes/auth");
 
-mongoose.connect(
-  "mongodb+srv://michaelseyo:" +
-    process.env.MONGO_ATLAS_PW +
-    "@carpark-where.iwmau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-  }
-);
+mongoose
+  .connect(
+    "mongodb+srv://michaelseyo:" +
+      process.env.MONGO_ATLAS_PW +
+      "@carpark-where.iwmau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log("Database Connected"))
+  .catch((err) => console.log(err));
+
 mongoose.Promise = global.Promise;
 
 app.use(morgan("dev"));

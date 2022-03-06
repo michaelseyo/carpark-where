@@ -1,4 +1,5 @@
 const http = require("http");
+require("dotenv").config();
 const app = require("./app");
 
 const port = process.env.PORT || 3001;
@@ -6,6 +7,5 @@ const port = process.env.PORT || 3001;
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  const url = `http://localhost:${port}`;
-  console.log(`Listening on ${url}`);
+  console.log(`Listening on port:${port}`);
 });
