@@ -6,17 +6,23 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import CardMedia from "@mui/material/CardMedia";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 
 import CarparkList from "../CarparkList";
 import "../../loader.css";
+import searchImg from "../../images/search-image.jpg";
 
 const searchStyle = {
   margin: "30px 0",
   minWidth: "300px",
   width: "40vw",
   maxWidth: "700px",
+};
+
+const cardMediaStyle = {
+  margin: "20px 0",
 };
 
 export default function Search() {
@@ -74,7 +80,18 @@ export default function Search() {
         margin: 5,
       }}
     >
-      <Typography variant="h5">Retrieve information</Typography>
+      <Typography variant="h3" color="primary" sx={{ fontWeight: "bolder" }}>
+        Retrieve information
+      </Typography>
+
+      <CardMedia
+        sx={cardMediaStyle}
+        component="img"
+        height="500"
+        image={searchImg}
+        alt="people-searching"
+      />
+
       <TextField
         label="By carpark number"
         variant="outlined"

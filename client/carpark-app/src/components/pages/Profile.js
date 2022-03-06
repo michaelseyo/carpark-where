@@ -7,17 +7,20 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 
+import profileImg from "../../images/profile-image.jpg";
+
 const gridStyle = {
-  margin: "60px 0",
+  margin: 5,
 };
 const paperStyle = {
   padding: "40px",
   height: "30vh",
   minHeight: "320px",
   width: 260,
-  margin: "20px auto",
+  margin: "70px auto",
 };
 const avatarStyle = {
   backgroundColor: "#1976d2",
@@ -28,6 +31,9 @@ const detailsGridStyle = {
 };
 const dividerStyle = {
   margin: "15px 0",
+};
+const cardMediaStyle = {
+  margin: "20px 0",
 };
 
 export default function Profile() {
@@ -70,7 +76,13 @@ export default function Profile() {
           <Avatar sx={avatarStyle}>
             <AccessibilityNewIcon />
           </Avatar>
-          <Typography variant="h5">My Profile</Typography>
+          <Typography
+            variant="h5"
+            color="primary"
+            sx={{ fontWeight: "bolder" }}
+          >
+            My Profile
+          </Typography>
 
           <Grid sx={detailsGridStyle}>
             <Divider sx={dividerStyle} textAlign="left">
@@ -96,6 +108,14 @@ export default function Profile() {
           </Grid>
         </Grid>
       </Paper>
+
+      <CardMedia
+        sx={cardMediaStyle}
+        component="img"
+        height="500"
+        image={profileImg}
+        alt="profile-pics"
+      />
     </Grid>
   );
 }

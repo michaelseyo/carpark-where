@@ -59,23 +59,23 @@ export default function Home() {
         margin: 5,
       }}
     >
-      <Typography variant="h3" color="primary" sx={{ fontWeight: "bolder" }}>
-        Welcome
-      </Typography>
-
-      <CardMedia
-        sx={cardMediaStyle}
-        component="img"
-        height="500"
-        image={headerImg}
-        alt="carpark-lot"
-      />
-
       <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}
         collapsedHeight={50}
       >
+        <Typography variant="h3" color="primary" sx={{ fontWeight: "bolder" }}>
+          Welcome
+        </Typography>
+
+        <CardMedia
+          sx={cardMediaStyle}
+          component="img"
+          height="500"
+          image={headerImg}
+          alt="carpark-lot"
+        />
+
         <Card elevation={0} sx={cardStyle}>
           <CardContent sx={cardContentStyle}>
             <DirectionsCarIcon color="primary" sx={iconStyle} />
