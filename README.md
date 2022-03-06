@@ -8,6 +8,17 @@ A carpark availability checker system. Data retrieved from [here](https://data.g
 
 Members have to create an account in order to use the system. For security purposes, the session lasts for 15 minutes before the member has to login again.
 
+## Tech used:
+
+- MongoDB
+- Express
+- React
+- Node
+
+MUI is used to create the various components and pages for the client.
+
+For authentication, JWT is used. Everytime a member logs in, if the inputs are correct, the server sends a response with the token for the member to access protected routes like the checking of carpark availabilies and the member profile.
+
 ## Using the API
 
 ### Backend API: https://my-carpark-api.herokuapp.com/
@@ -125,17 +136,6 @@ Response:
     "data": ...
 }
 ```
-
-## Tech used:
-
-- MongoDB
-- Express
-- React
-- Node
-
-MUI is used to create the various components and pages for the client.
-
-For authentication, JWT is used. Everytime a member logs in, if the inputs are correct, the server sends a response with the token for the member to access protected routes like the checking of carpark availabilies and the member profile.
 
 ## Learning Points
 
