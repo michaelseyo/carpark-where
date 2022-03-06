@@ -32,7 +32,9 @@ exports.register = async (req, res, next) => {
             request: {
               type: "GET",
               description: "Get details of member",
-              url: "http://localhost:3001/details/" + result._id,
+              url:
+                "https://my-carpark-api.herokuapp.com/api/details/" +
+                result._id,
             },
           });
         } catch (err) {

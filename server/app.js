@@ -12,16 +12,7 @@ const availabilityRoutes = require("./routes/availability");
 const authRoutes = require("./routes/auth");
 
 mongoose
-  .connect(
-    "mongodb+srv://michaelseyo:" +
-      process.env.MONGO_ATLAS_PW +
-      "@carpark-where.iwmau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("Database Connected"))
   .catch((err) => console.log(err));
 
