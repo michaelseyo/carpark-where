@@ -21,7 +21,7 @@ For authentication, JWT is used. Everytime a member logs in, if the inputs are c
 
 ## Using the API
 
-### Backend API: https://my-carpark-api.herokuapp.com/
+### Backend API: https://carpark-where-api.onrender.com
 
 Can use [Postman](https://www.postman.com/) for testing out the requests.
 
@@ -65,7 +65,7 @@ Response:
     "request": {
         "type": "GET",
         "description": "Get details of member",
-        "url": "https://my-carpark-api.herokuapp.com/api/details/6224aa01309d2d07a3975c61"
+        "url": "https://carpark-where-api.onrender.com/api/details/6224aa01309d2d07a3975c61"
     }
 }
 ```

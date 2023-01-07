@@ -33,7 +33,7 @@ exports.register = async (req, res, next) => {
               type: "GET",
               description: "Get details of member",
               url:
-                "https://my-carpark-api.herokuapp.com/api/details/" +
+                "https://carpark-where-api.onrender.com/api/details/" +
                 result._id,
             },
           });
